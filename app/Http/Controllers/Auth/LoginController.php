@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+// add
+use Illuminate\Http\Request;
+use App\User;
+
 class LoginController extends Controller
 {
     /*
@@ -36,5 +40,11 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    // login success alert
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect(RouteServiceProvider::HOME)->with('success', 'You have been login.');
     }
 }

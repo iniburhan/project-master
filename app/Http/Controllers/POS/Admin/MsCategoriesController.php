@@ -72,7 +72,7 @@ class MsCategoriesController extends Controller
             'description' => $request->description,
             'updated_by'=> Auth::user()->id,
         ];
-        dd($data);
+        // dd($data);
         $update = MsCategories::where('id', $request->id)->update($data);
 
         if ($update) {
@@ -82,8 +82,18 @@ class MsCategoriesController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $data = [
+            'flag' => 0,
+        ];
+        // dd($data);
+        $delete = MsCategories::where('id', $request->id)->update($data);
+
+        if ($delete) {
+            return redirect('/categories')->with('success', 'Data Deleted.');
+        } else {
+            return redirect('/categories')->with('error', 'Failed!');
+        }
     }
 }

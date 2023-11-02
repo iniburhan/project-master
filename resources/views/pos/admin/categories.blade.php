@@ -75,9 +75,9 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->description}}</td>
-                                <td>
-                                    <form action="#" method="POST" style="text-align:center">
-                                        <input type="hidden" name="id" value = "{{$item->id}}">
+                                <td class="text-center">
+                                    <form action="{{url('/categories/delete')}}/{{$item->id}}" id="delete_data_form{{$item->id}}" method="POST" style="text-align:center">
+                                        {{-- <input type="text" name="id" value = "{{$item->id}}"> --}}
                                         <button type="button" class="btn icon btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#modalShow{{$item->id}}"><i class="fa-solid fa-eye"></i>
                                         </button>
@@ -86,9 +86,10 @@
                                         </button>
 
                                         @csrf
-                                        <button type="button" title="delete"  class="btn icon btn-danger"data-bs-toggle="modal"
+                                        {{-- <button type="button" title="delete" id="delete_data" class="btn icon btn-danger"data-bs-toggle="modal"
                                             data-bs-target="#modalDelete{{$item->id}}"><i class="fa-solid fa-trash"></i>
-                                        </button>
+                                        </button> --}}
+                                        <button type="button" title="delete" onclick="deleteFunction({{$item->id}})" class="btn icon btn-danger"><i class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -308,6 +309,7 @@
     <script src="sweetalert2.all.min.js"></script>
     <script src="sweetalert2.min.js"></script>
     <script>
+        // sweetalert create
         $('#create_data').submit(function(e) {
             e.preventDefault();
             $.ajaxSetup({
@@ -341,5 +343,64 @@
                 },
             });
         });
+
+        // sweetalert edit
+        $('#edit_data').submit(function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            });
+            $.ajax({
+                url: "{{ url('/categories/update') }}",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(data) {
+                    console.log(data);
+                    if (data.status = true) {
+                        $('#modalEdit').modal('hide');
+                        Swal.fire({
+                            title: 'Good job!',
+                            text: 'Data Updated Successfully!',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                        location.reload();
+                    } else {
+                        Swal.fire({
+                            title: 'Failed!',
+                            text: 'Data Failed to Update!',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                },
+            });
+        });
+
+        // sweetalert create
+        function deleteFunction(id) {
+            event.preventDefault(); // prevent form submit
+            var form = event.target.form; // storing the form
+            Swal.fire({
+                title: "Are you sure?",
+                text: "But you will still be able to retrieve this file.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, archive it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            })
+            .then(function(inputvalue){
+                if(inputvalue.isConfirmed) {
+                    $('#delete_data_form'+id).submit(); // submitting the form when user press yes
+                }else{
+                    Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
+                }
+            });
+        }
     </script>
 @endsection

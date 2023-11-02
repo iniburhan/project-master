@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/categories/edit/{id}', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'edit']);
     Route::post('/categories/update', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'update']);
 
-    Route::post('/categories/delete', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'destroy']);
+    Route::post('/categories/delete/{id}', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'destroy']);
 
 });
 

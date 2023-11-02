@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 // add
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class LoginController extends Controller
@@ -46,5 +47,16 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return redirect(RouteServiceProvider::HOME)->with('success', 'You have been login.');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

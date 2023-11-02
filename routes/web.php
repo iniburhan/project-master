@@ -19,4 +19,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
+
+    // route Home
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+
+    // route Category
+    Route::get('/categories', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'index']);
+    Route::post('/categories/store', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'store']);
+    // Route::get('/categories/show/{id}', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'show']);
+    // Route::get('/categories/edit/{id}', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'edit']);
+    Route::post('/categories/update', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'update']);
+
+    Route::post('/categories/delete', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'destroy']);
+
+});
+

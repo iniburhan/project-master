@@ -451,13 +451,13 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item active open">
+        <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="{{url('/home')}}" class="menu-link">
                         <div class="text-truncate" data-i18n="Home">Home</div>
                     </a>
@@ -501,6 +501,16 @@
                 <li class="menu-item">
                     <a href="{{url('/categories')}}" class="menu-link">
                         <div class="text-truncate" data-i18n="Category">Category</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{url('/customers')}}" class="menu-link">
+                        <div class="text-truncate" data-i18n="Customer">Customer</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{url('/products')}}" class="menu-link">
+                        <div class="text-truncate" data-i18n="Product">Product</div>
                     </a>
                 </li>
             </ul>

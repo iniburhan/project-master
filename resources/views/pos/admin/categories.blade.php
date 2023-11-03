@@ -294,20 +294,44 @@
     <!-- / Content -->
 
     {{-- Datatable --}}
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
+    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}">
+    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css')}}">
+    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}">
+    <!-- Row Group CSS -->
+    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css')}}">
+    <!-- Vendors JS -->
+    {{-- <script src="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script> --}}
+    <!-- Page JS -->
+    {{-- <script src="{{asset('template/sneat/assets/js/tables-datatables-basic.js')}}"></script>
+    <script src="{{asset('template/sneat/assets/js/tables-datatables-advanced.js')}}"></script> --}}
+
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" /> --}}
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" /> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" />
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    {{-- <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script> --}}
+
     <script>
         $('#example').DataTable();
     </script>
 
     {{-- Sweetalert --}}
-    <link rel="stylesheet" href="sweetalert2.min.css">
+    {{-- <link rel="stylesheet" href="sweetalert2.min.css"> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="sweetalert2.min.js"></script>
+    {{-- <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script> --}}
     <script>
         // sweetalert create
         $('#create_data').submit(function(e) {
@@ -329,9 +353,11 @@
                             title: 'Good job!',
                             text: 'Data Saved Successfully!',
                             icon: 'success',
-                            confirmButtonText: 'OK'
+                            confirmButtonText: 'OK',
+                        })
+                        .then((result) => {
+                            location.reload();
                         });
-                        location.reload();
                     } else {
                         Swal.fire({
                             title: 'Failed!',
@@ -365,6 +391,9 @@
                             text: 'Data Updated Successfully!',
                             icon: 'success',
                             confirmButtonText: 'OK'
+                        })
+                        .then((result) => {
+                            location.reload();
                         });
                         location.reload();
                     } else {
@@ -384,12 +413,12 @@
             event.preventDefault(); // prevent form submit
             var form = event.target.form; // storing the form
             Swal.fire({
-                title: "Are you sure?",
-                text: "But you will still be able to retrieve this file.",
-                type: "warning",
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, archive it!",
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: "Yes, delete it!",
                 cancelButtonText: "No, cancel please!",
                 closeOnConfirm: false,
                 closeOnCancel: false
@@ -397,10 +426,11 @@
             .then(function(inputvalue){
                 if(inputvalue.isConfirmed) {
                     $('#delete_data_form'+id).submit(); // submitting the form when user press yes
+                    Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
                 }else{
                     Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
                 }
             });
-        }
+        };
     </script>
 @endsection

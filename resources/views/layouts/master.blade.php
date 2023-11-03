@@ -44,16 +44,16 @@
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
-        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
+        {{-- <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}">
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css')}}">
-        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}">
+        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}"> --}}
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/flatpickr/flatpickr.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/animate-css/animate.css')}}">
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
         <!-- Row Group CSS -->
-        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css')}}">
+        {{-- <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css')}}"> --}}
         <!-- Form Validation -->
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/%40form-validation/umd/styles/index.min.css')}}" />
 
@@ -64,7 +64,7 @@
 
         <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
         <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-        <script src="{{asset('template/sneat/assets/vendor/js/template-customizer.js')}}"></script>
+        {{-- <script src="{{asset('template/sneat/assets/vendor/js/template-customizer.js')}}"></script> --}}
         <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
         <script src="{{asset('template/sneat/assets/js/config.js')}}"></script>
     </head>
@@ -123,7 +123,7 @@
 
         <!-- Vendors JS -->
         <script src="{{asset('template/sneat/assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
-        <script src="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
+        {{-- <script src="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script> --}}
         <script src="{{asset('template/sneat/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js')}}"></script>
         <script src="{{asset('template/sneat/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js')}}"></script>
         <script src="{{asset('template/sneat/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js')}}"></script>
@@ -143,10 +143,10 @@
         <script src="{{asset('template/sneat/assets/js/dashboards-analytics.js')}}"></script>
         <script src="{{asset('template/sneat/assets/js/ui-toasts.js')}}"></script>
         <script src="{{asset('template/sneat/assets/js/form-validation.js')}}"></script>
-        <script src="{{asset('template/sneat/assets/js/ui-modals.js')}}"></script>
+        {{-- <script src="{{asset('template/sneat/assets/js/ui-modals.js')}}"></script> --}}
         <script src="{{asset('template/sneat/assets/js/extended-ui-sweetalert2.js')}}"></script>
-        <script src="{{asset('template/sneat/assets/js/tables-datatables-basic.js')}}"></script>
-        <script src="{{asset('template/sneat/assets/js/tables-datatables-advanced.js')}}"></script>
+        {{-- <script src="{{asset('template/sneat/assets/js/tables-datatables-basic.js')}}"></script>
+        <script src="{{asset('template/sneat/assets/js/tables-datatables-advanced.js')}}"></script> --}}
 
         <!-- Place this tag in your head or just before your close body tag. -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>

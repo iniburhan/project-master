@@ -5,81 +5,108 @@ namespace App\Http\Controllers\POS\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// add
+use App\Models\Table\POS\MsCustomers;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\Table\POS\MsCategories;
+
 class MsCustomersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $customers = MsCustomers::where('flag', 1)->get();
+
+        $data = [
+            'customers' => $customers,
+        ];
+        // dd($data);
+
+        return view('pos/admin/customers')->with('data', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+        ]);
+        $data  = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'flag' => 1,
+            'created_by'=> Auth::user()->id,
+        ];
+        dd($data);
+        $customers = MsCustomers::insert($data);
+
+        // redirect
+        if ($customers) {
+            return redirect('/customers')->with('success', 'Data created successfully.');
+        } else {
+            return redirect('/customers')->with('error', 'Failed!');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+        ]);
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'updated_by'=> Auth::user()->id,
+        ];
+        // dd($data);
+        $update = MsCustomers::where('id', $request->id)->update($data);
+
+        if ($update) {
+            return redirect('/customers')->with('success', 'Data updated successfully.');
+        } else {
+            return redirect('/customers')->with('error', 'Failed!');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $data = [
+            'flag' => 0,
+        ];
+        // dd($data);
+        $delete = MsCustomers::where('id', $request->id)->update($data);
+
+        if ($delete) {
+            return redirect('/customers')->with('success', 'Data Deleted.');
+        } else {
+            return redirect('/customers')->with('error', 'Failed!');
+        }
     }
+    public function getAllCustomer()
+    {
+        $category = MsCategories::where('flag', 1)->get();
+
+        return $category;
+    }
+
 }

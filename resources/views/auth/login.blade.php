@@ -165,7 +165,16 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                                <button class="btn btn-primary d-grid w-100" id="login_btn" type="submit">Sign in</button>
+                                <button class="btn btn-primary d-grid w-100" id="login_loading" type="button" disabled>
+                                    <div class="sk-wave sk-secondary">
+                                        <div class="sk-wave-rect"></div>
+                                        <div class="sk-wave-rect"></div>
+                                        <div class="sk-wave-rect"></div>
+                                        <div class="sk-wave-rect"></div>
+                                        <div class="sk-wave-rect"></div>
+                                    </div>
+                                </button>
                             </div>
                         </form>
 
@@ -183,4 +192,18 @@
             </div>
         </div>
     </div>
+
+    @section('my-script')
+        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/spinkit/spinkit.css')}}" />
+        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> --}}
+
+        <script>
+            $('#login_loading').hide();
+            $(document).ready(function() {
+                $('#login_btn').click(function() {
+                    $('#login_loading').show();
+                });
+            });
+        </script>
+    @endsection
 @endsection

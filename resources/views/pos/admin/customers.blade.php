@@ -28,247 +28,232 @@
                         <h5 class="card-title mb-0 pt-2">Data Customers</h5>
                     </div>
                     <div class="col-md-6 text-end">
-                        {{-- <div class="text-right"> --}}
-                            {{-- <button class="dt-button create-new btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-                                <span><i class="bx bx-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New Record</span></span>
-                            </button> --}}
-                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreate">
-                                <span><i class="bx bx-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New</span></span>
-                            </button> --}}
-                        {{-- </div> --}}
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreate">
+                            <span><i class="bx bx-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New</span></span>
+                        </button>
                     </div>
                 </div>
             </div>
+
             <div class="card-datatable table-responsive">
                 <table id="example" class="table border-top" style="width:100%">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Description</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th></th>
+                            {{-- <th></th> --}}
                         </tr>
                     </thead>
                 </table>
             </div>
         </div>
+
+        {{-- Modal Create --}}
+        <div class="modal fade animate__bounceIn" id="modalCreate" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ url('/categories/store') }}" id="create_data" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        @csrf
+                        <div class="modal-body">
+                            <div class="col-sm-12">
+                                <label class="form-label">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Customer Name" required/>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter category name. </div>
+                            </div>
+                            <div class="col-sm-12 mt-2">
+                                <label class="form-label">Address</label>
+                                <input type="text" id="address" name="address" class="form-control" placeholder="Address" required/>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter the address. </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="john.doe@example.com" required/>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter the email. </div>
+                                {{-- <div class="form-text">
+                                    You can use letters, numbers & periods
+                                </div> --}}
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Phone</label>
+                                <input type="number" id="phone" name="phone" class="form-control" placeholder="+62822xxx" maxlength="12" required/>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter the phone. </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                            <!-- button for add data -->
+                            <button type="button" class="btn btn-primary" id="btn_add">Save</button>
+                            <!-- button submit for validation when input type is empty -->
+                            <button type="submit" class="btn btn-primary d-none" id="btn_add_2">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{-- End Modal Create --}}
+
         <hr class="my-5">
     </div>
     <!-- / Content -->
 
-    {{-- Datatable --}}
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
-    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}">
-    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css')}}">
-    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}">
-    <!-- Row Group CSS -->
-    <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css')}}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" />
+    @section('my-script')
+        <script>
+            // Show table with data
+            var table_customer = $('#example').DataTable({
+                // dom: '<lf<t>ip>',
+                ajax: {
+                    url:'{{url("/customers/get-all-customer")}}',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'name' },
+                    { data: 'email' },
+                    { data: 'address' },
+                    { data: 'phone' },
+                    {
+                        data: "id",
+                        render: function(data) {
+                            return `<td>
+                                <a class="btn btn-primary btn-icon rounded-pill text-white btn-edit" data-id="${data}"><i class="fas fa-edit"></i></a>
+                                <div class="btn-group dropstart">
+                                    <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item text-black btn-show" data-id="${data}">Show</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item btn-label-danger text-black btn-delete" data-id="${data}">Delete</a></li>
+                                    </ul>
+                                </div>
+                            </td>`
+                        }
+                    },
+                ]
+            });
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" /> --}}
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-        $('#example').DataTable({
-            dom: '<lf<t>ip>',
-            ajax: {
-                url:'{{url("/customers/get-all-customer")}}',
-                dataSrc: ''
-            },
-            columns: [
-                { data: 'name' },
-                { data: 'description' }
-            ]
-        });
-    </script>
+            // Empty input type when modal hidden
+            $('#modalCreate').on('hidden.bs.modal', function (e) {
+                $('#name').val('');
+                $('#address').val('');
+                $('#email').val('');
+                $('#phone').val('');
+                $('#btn_add').prop('disabled', false); // button save enable when data input is empty
+            });
 
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.7.0/css/select.bootstrap5.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css" />
-    <link rel="stylesheet" href="https://editor.datatables.net/extensions/Editor/css/editor.bootstrap5.min.css" />
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
-    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
-    <script src="{{asset('template/sneat/assets/js/dataTables.editor.min.js')}}"></script>
-    <script src="{{asset('template/sneat/assets/js/editor.bootstrap5.min.js')}}"></script> --}}
-    {{-- <script>
-        var editor = new DataTable.Editor({
-            ajax: '../php/staff.php',
-            // dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            bootstrap: {
-                floatingLabels: true
-            },
-            fields: [
-                {
-                    label: 'First name:',
-                    name: 'first_name'
-                },
-                {
-                    label: 'Last name:',
-                    name: 'last_name'
-                },
-                {
-                    label: 'Position:',
-                    name: 'position'
-                },
-                {
-                    label: 'Office:',
-                    name: 'office'
-                },
-                {
-                    label: 'Extension:',
-                    name: 'extn'
-                },
-                {
-                    label: 'Start date:',
-                    name: 'start_date',
-                    type: 'datetime'
-                },
-                {
-                    label: 'Salary:',
-                    name: 'salary'
-                }
-            ],
-            table: '#example'
-        });
-
-        var table = $('#example').DataTable({
-            ajax: '../php/staff.php',
-            columns: [
-                {
-                    data: null,
-                    render: function (data, type, row) {
-                        // Combine the first and last names into a single table field
-                        return data.first_name + ' ' + data.last_name;
+            // Add Data
+            $('#btn_add').on('click', function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}" // token like @csrf in html
                     }
-                },
-                { data: 'position' },
-                { data: 'office' },
-                { data: 'extn' },
-                { data: 'start_date' },
-                { data: 'salary', render: DataTable.render.number(null, null, 0, '$') }
-            ],
-            lengthChange: false,
-            select: true
-        });
-
-        // Display the buttons
-        new DataTable.Buttons(table, [
-            { extend: 'create', editor: editor },
-            { extend: 'edit', editor: editor },
-            { extend: 'remove', editor: editor }
-        ]);
-
-        table.buttons().container().appendTo($('.col-md-6:eq(0)', table.table().container()));
-    </script> --}}
-
-    {{-- Sweetalert --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
-    {{-- <script>
-        // sweetalert create
-        $('#create_data').submit(function(e) {
-            e.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            });
-            $.ajax({
-                url: "{{ url('/categories/store') }}",
-                type: "POST",
-                data: $(this).serialize(),
-                success: function(data) {
-                    console.log(data);
-                    if (data.status = true) {
-                        $('#modalCreate').modal('hide');
-                        Swal.fire({
-                            title: 'Good job!',
-                            text: 'Data Saved Successfully!',
-                            icon: 'success',
-                            confirmButtonText: 'OK',
-                        })
-                        .then((result) => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Failed!',
-                            text: 'Data Failed to Save!',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                },
-            });
-        });
-
-        // sweetalert edit
-        $('#edit_data').submit(function(e) {
-            e.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            });
-            $.ajax({
-                url: "{{ url('/categories/update') }}",
-                type: "POST",
-                data: $(this).serialize(),
-                success: function(data) {
-                    console.log(data);
-                    if (data.status = true) {
-                        $('#modalEdit').modal('hide');
-                        Swal.fire({
-                            title: 'Good job!',
-                            text: 'Data Updated Successfully!',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        })
-                        .then((result) => {
-                            location.reload();
-                        });
-                        location.reload();
-                    } else {
-                        Swal.fire({
-                            title: 'Failed!',
-                            text: 'Data Failed to Update!',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                },
-            });
-        });
-
-        // sweetalert create
-        function deleteFunction(id) {
-            event.preventDefault(); // prevent form submit
-            var form = event.target.form; // storing the form
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel please!",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            })
-            .then(function(inputvalue){
-                if(inputvalue.isConfirmed) {
-                    $('#delete_data_form'+id).submit(); // submitting the form when user press yes
-                    Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                });
+                let name = $('#name').val();
+                let address = $('#address').val();
+                let email = $('#email').val();
+                let phone = $('#phone').val();
+                // alert(name+' '+address+' '+email+' '+phone);
+                if (!name && !address && !email && !phone) {
+                    $('#btn_add_2').click(); // button submit for validation when input type is empty
                 }else{
-                    Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
+                    $(this).prop('disabled', true); // button save disabled after click
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('/customers/store') }}",
+                        data: {name: name, address: address, email: email, phone: phone},
+                        // dataType: dataType
+                        success: function(response){
+                            if(response){
+                                $('#modalCreate').modal('hide');
+                                Swal.fire({
+                                    title: 'Good job!',
+                                    text: 'Data Saved Successfully!',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK',
+                                });
+                            }else{
+                                Swal.fire({
+                                    title: 'Failed!',
+                                    text: 'Data Failed to Save!',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                            table_customer.ajax.reload();
+                        }
+                    });
                 }
+
             });
-        };
-    </script> --}}
+
+            // Show record
+            $('#example').on('click', '.btn-show', function (e) {
+                e.preventDefault();
+                var values = $(this).data("id");
+                alert(values);
+
+                // $.ajax({
+                //     type: "GET",
+                //     url: "{{ url('/customers/store') }}",
+                //     data: {name: name, address: address, email: email, phone: phone},
+                //     // dataType: dataType
+                //     success: function(response){
+                //         if(response){
+                //             $('#modalCreate').modal('hide');
+                //             Swal.fire({
+                //                 title: 'Good job!',
+                //                 text: 'Data Saved Successfully!',
+                //                 icon: 'success',
+                //                 confirmButtonText: 'OK',
+                //             });
+                //         }else{
+                //             Swal.fire({
+                //                 title: 'Failed!',
+                //                 text: 'Data Failed to Save!',
+                //                 icon: 'error',
+                //                 confirmButtonText: 'OK'
+                //             });
+                //         }
+                //         table_customer.ajax.reload();
+                //     }
+                // });
+            });
+
+            // Edit record
+            $('#example').on('click', '.btn-edit', function (e) {
+                e.preventDefault();
+                var values = $(this).data("id");
+                alert(values);
+
+                // editor.edit($(this).closest('tr'), {
+                //     title: 'Edit record',
+                //     buttons: 'Update'
+                // });
+            });
+
+            // Delete a record
+            $('#example').on('click', '.btn-delete', function (e) {
+                e.preventDefault();
+                var values = $(this).data("id");
+                alert(values);
+
+                // editor.remove($(this).closest('tr'), {
+                //     title: 'Delete record',
+                //     message: 'Are you sure you wish to remove this record?',
+                //     buttons: 'Delete'
+                // });
+            });
+        </script>
+    @endsection
 @endsection

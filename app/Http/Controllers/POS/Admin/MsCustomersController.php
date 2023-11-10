@@ -46,7 +46,7 @@ class MsCustomersController extends Controller
             'flag' => 1,
             'created_by'=> Auth::user()->id,
         ];
-        dd($data);
+        // dd($data);
         $customers = MsCustomers::insert($data);
 
         // redirect
@@ -59,7 +59,9 @@ class MsCustomersController extends Controller
 
     public function show($id)
     {
-        //
+        dd($id);
+        $customers = MsCustomers::where('id', $id)->where('flag', 1)->get();
+        return $customers;
     }
 
     public function edit($id)
@@ -104,9 +106,8 @@ class MsCustomersController extends Controller
     }
     public function getAllCustomer()
     {
-        $category = MsCategories::where('flag', 1)->get();
-
-        return $category;
+        $customers = MsCustomers::where('flag', 1)->get();
+        return $customers;
     }
 
 }

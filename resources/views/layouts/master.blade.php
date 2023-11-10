@@ -44,16 +44,16 @@
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
-        {{-- <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
+        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}">
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css')}}">
-        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}"> --}}
+        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}">
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/flatpickr/flatpickr.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/animate-css/animate.css')}}">
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
         <!-- Row Group CSS -->
-        {{-- <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css')}}"> --}}
+        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css')}}">
         <!-- Form Validation -->
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/%40form-validation/umd/styles/index.min.css')}}" />
 
@@ -105,10 +105,6 @@
         </div>
         <!-- / Layout wrapper -->
 
-        <div class="buy-now">
-            <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/" target="_blank" class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
-        </div>
-
         <!-- Core JS -->
         <!-- build:js assets/vendor/js/core.js -->
         <script src="{{asset('template/sneat/assets/vendor/libs/jquery/jquery.js')}}"></script>
@@ -150,6 +146,16 @@
 
         <!-- Place this tag in your head or just before your close body tag. -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+        <!-- Add -->
+        {{-- Datatable --}}
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        {{-- Sweetalert --}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        @yield('my-script')
+
     </body>
 </html>
 

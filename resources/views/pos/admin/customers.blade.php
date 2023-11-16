@@ -2,7 +2,8 @@
 
 @section('content')
     <!-- Content -->
-    <div class="container-xxl flex-grow-1 container-p-y">
+    {{-- <div class="container-xxl flex-grow-1 container-p-y"> --}}
+    <div class="flex-grow-1 container-p-y container-fluid">
         <h4 class="py-3 mb-4">
             <span class="text-muted fw-light">Customers</span>
         </h4>
@@ -43,7 +44,7 @@
                             <th>Email</th>
                             <th>Address</th>
                             <th>Phone</th>
-                            <th></th>
+                            <th class="text-center">Action</th>
                             {{-- <th></th> --}}
                         </tr>
                     </thead>
@@ -103,8 +104,111 @@
         </div>
         {{-- End Modal Create --}}
 
-        <hr class="my-5">
+        {{-- Modal Edit --}}
+        <div class="modal fade animate__bounceIn" id="modalEdit" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="title-edit"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    {{-- <form action="{{ url('/categories/update') }}" id="edit_data" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        @csrf --}}
+                        <div class="modal-body">
+                            <div class="col-sm-12">
+                                <label class="form-label">Name</label>
+                                <input type="hidden" id="id-edit" name="id" class="form-control" />
+                                <input type="text" id="name-edit" name="name" class="form-control" placeholder="Customer Name" required/>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter category name. </div>
+                            </div>
+                            <div class="col-sm-12 mt-2">
+                                <label class="form-label">Address</label>
+                                <input type="text" id="address-edit" name="address" class="form-control" placeholder="Address" required/>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter the address. </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Email</label>
+                                <input type="email" id="email-edit" name="email" class="form-control" placeholder="john.doe@example.com" required/>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter the email. </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Phone</label>
+                                <input type="number" id="phone-edit" name="phone" class="form-control" placeholder="+62822xxx" required/>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter the phone. </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                            <!-- button for add data -->
+                            <button type="button" class="btn btn-primary" id="btn_edit">Edit</button>
+                            <!-- button submit for validation when input type is empty -->
+                            <button type="submit" class="btn btn-primary d-none" id="btn_edit_2">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{-- End Modal Edit --}}
+
+        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        {{-- Modal Show --}}
+        <div class="modal fade animate__bounceIn" id="modalShow" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="title-show"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-sm-12">
+                            <label class="form-label">Name</label>
+                            <input type="text" id="name-show" name="name" class="form-control" placeholder="Customer Name" readonly/>
+                        </div>
+                        <div class="col-sm-12 mt-2">
+                            <label class="form-label">Address</label>
+                            <input type="text" id="address-show" name="address" class="form-control" placeholder="Address" readonly/>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="email-show" name="email" class="form-control" placeholder="john.doe@example.com" readonly/>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="form-label">Phone</label>
+                            <input type="number" id="phone-show" name="phone" class="form-control" placeholder="+62822xxx" readonly/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- End Modal Show --}}
+
+        {{-- <hr class="my-5"> --}}
     </div>
+
     <!-- / Content -->
 
     @section('my-script')
@@ -129,11 +233,11 @@
                                 <div class="btn-group dropstart">
                                     <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></button>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item text-black btn-show" data-id="${data}">Show</a></li>
+                                        <li><a class="dropdown-item text-black btn-show" data-id="${data}" href="javascript:void(0);">Show</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item btn-label-danger text-black btn-delete" data-id="${data}">Delete</a></li>
+                                        <li><a class="dropdown-item text-danger btn-delete" data-id="${data}" href="javascript:void(0);">Delete</a></li>
                                     </ul>
                                 </div>
                             </td>`
@@ -142,7 +246,7 @@
                 ]
             });
 
-            // Empty input type when modal hidden
+            // Empty input type when modal Create hidden
             $('#modalCreate').on('hidden.bs.modal', function (e) {
                 $('#name').val('');
                 $('#address').val('');
@@ -200,59 +304,141 @@
             // Show record
             $('#example').on('click', '.btn-show', function (e) {
                 e.preventDefault();
-                var values = $(this).data("id");
-                alert(values);
+                var id = $(this).data("id");
 
-                // $.ajax({
-                //     type: "GET",
-                //     url: "{{ url('/customers/store') }}",
-                //     data: {name: name, address: address, email: email, phone: phone},
-                //     // dataType: dataType
-                //     success: function(response){
-                //         if(response){
-                //             $('#modalCreate').modal('hide');
-                //             Swal.fire({
-                //                 title: 'Good job!',
-                //                 text: 'Data Saved Successfully!',
-                //                 icon: 'success',
-                //                 confirmButtonText: 'OK',
-                //             });
-                //         }else{
-                //             Swal.fire({
-                //                 title: 'Failed!',
-                //                 text: 'Data Failed to Save!',
-                //                 icon: 'error',
-                //                 confirmButtonText: 'OK'
-                //             });
-                //         }
-                //         table_customer.ajax.reload();
-                //     }
-                // });
+                $('#modalShow').modal('show');
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('/customers/get-customer-show') }}",
+                    data: {id: id},
+                    success: function(data){
+                        console.log(data);
+                        $('#title-show').html(data.name);
+                        $('#name-show').val(data.name);
+                        $('#address-show').val(data.address);
+                        $('#email-show').val(data.email);
+                        $('#phone-show').val(data.phone);
+                    }
+                });
+            });
+
+            // Empty input type when modal Edit hidden
+            $('#modalEdit').on('hidden.bs.modal', function (e) {
+                $('#btn_edit').prop('disabled', false); // button save enable when data input is empty
             });
 
             // Edit record
             $('#example').on('click', '.btn-edit', function (e) {
                 e.preventDefault();
-                var values = $(this).data("id");
-                alert(values);
+                var id = $(this).data("id");
 
-                // editor.edit($(this).closest('tr'), {
-                //     title: 'Edit record',
-                //     buttons: 'Update'
-                // });
+                $('#modalEdit').modal('show');
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('/customers/get-customer-show') }}",
+                    data: {id: id},
+                    success: function(data){
+                        console.log(data.id);
+                        $('#title-edit').html(data.name);
+                        $('#id-edit').val(data.id);
+                        $('#name-edit').val(data.name);
+                        $('#address-edit').val(data.address);
+                        $('#email-edit').val(data.email);
+                        $('#phone-edit').val(data.phone);
+
+                    }
+                });
+
+            });
+
+            $('#btn_edit').on('click', function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}" // token like @csrf in html
+                    }
+                });
+                var id = $('#id-edit').val();
+                let name = $('#name-edit').val();
+                let address = $('#address-edit').val();
+                let email = $('#email-edit').val();
+                let phone = $('#phone-edit').val();
+
+                if (!name && !address && !email && !phone) {
+                    $('#btn_edit_2').click(); // button submit for validation when input type is empty
+                }else{
+                    $(this).prop('disabled', true); // button save disabled after click
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('/customers/update') }}",
+                        data: {id: id, name: name, address: address, email: email, phone: phone},
+                        // dataType: dataType
+                        success: function(response){
+                            if(response){
+                                $('#modalEdit').modal('hide');
+                                Swal.fire({
+                                    title: 'Good job!',
+                                    text: 'Data Updated Successfully!',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK',
+                                });
+                            }else{
+                                Swal.fire({
+                                    title: 'Failed!',
+                                    text: 'Data Failed to Update!',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                            table_customer.ajax.reload();
+                        }
+                    });
+                }
             });
 
             // Delete a record
             $('#example').on('click', '.btn-delete', function (e) {
                 e.preventDefault();
-                var values = $(this).data("id");
-                alert(values);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}" // token like @csrf in html
+                    }
+                });
+                var id = $(this).data("id");
+                // alert(id);
 
-                // editor.remove($(this).closest('tr'), {
-                //     title: 'Delete record',
-                //     message: 'Are you sure you wish to remove this record?',
-                //     buttons: 'Delete'
-                // });
+                // $('#modalDelete').modal('show');
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // alert(id);
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('/customers/delete') }}",
+                            data: {id: id},
+                            // dataType: dataType
+                            success: function(response){
+                                // alert(id);
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+                                table_customer.ajax.reload();
+                            }
+                        });
+                    }
+                });
+
             });
         </script>
     @endsection

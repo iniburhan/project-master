@@ -37,11 +37,12 @@ Route::group(['middleware' => ['auth']], function () {
     // route Customer
     Route::get('/customers', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'index']);
     Route::post('/customers/store', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'store']);
-    Route::get('/categories/show/{id}', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'show']);
+    // Route::get('/categories/show/{id}', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'show']);
     Route::post('/customers/update', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'update']);
     // Route::post('/customers/delete', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'destroy']); // with modal not sweetalert
-    Route::post('/customers/delete/{id}', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'destroy']);
+    Route::post('/customers/delete', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'destroy']);
     Route::get('/customers/get-all-customer', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'getAllCustomer']);
+    Route::get('/customers/get-customer-show', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'getCustomerShow']);
 
 });
 

@@ -80,7 +80,7 @@ class MsCustomersController extends Controller
             'phone' => $request->phone,
             'updated_by'=> Auth::user()->id,
         ];
-        // dd($data);
+        // dd($request->all());
         $update = MsCustomers::where('id', $request->id)->update($data);
 
         if ($update) {
@@ -90,7 +90,7 @@ class MsCustomersController extends Controller
         }
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request)
     {
         $data = [
             'flag' => 0,
@@ -104,9 +104,18 @@ class MsCustomersController extends Controller
             return redirect('/customers')->with('error', 'Failed!');
         }
     }
+
     public function getAllCustomer()
     {
         $customers = MsCustomers::where('flag', 1)->get();
+        return $customers;
+    }
+
+    public function getCustomerShow(Request $request)
+    {
+        $id = $request->id;
+        $customers = MsCustomers::where('flag', 1)->where('id', $id)->first();
+        // dd($customers);
         return $customers;
     }
 

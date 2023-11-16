@@ -36,7 +36,7 @@ class MsCustomersController extends Controller
             'name' => 'required',
             'email' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|min:9|max:13',
         ]);
         $data  = [
             'name' => $request->name,

@@ -243,7 +243,10 @@
                             </td>`
                         }
                     },
-                ]
+                ],
+                columnDefs: [
+                    { className: 'text-center', targets: [4] },
+                ],
             });
 
             // Empty input type when modal Create hidden
@@ -298,7 +301,6 @@
                         }
                     });
                 }
-
             });
 
             // Show record
@@ -347,10 +349,8 @@
                         $('#address-edit').val(data.address);
                         $('#email-edit').val(data.email);
                         $('#phone-edit').val(data.phone);
-
                     }
                 });
-
             });
 
             $('#btn_edit').on('click', function(e){
@@ -438,7 +438,6 @@
                         });
                     }
                 });
-
             });
         </script>
     @endsection

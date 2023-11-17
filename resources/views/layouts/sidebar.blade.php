@@ -490,28 +490,91 @@
             </ul>
         </li>
 
-        <!-- Master Data -->
+        <!-- POS App -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div class="text-truncate" data-i18n="Master Data">Master Data</div>
+                <div class="text-truncate" data-i18n="POS App">POS App</div>
             </a>
 
             <ul class="menu-sub">
+                <!-- Master Data -->
                 <li class="menu-item">
-                    <a href="{{url('/categories')}}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Category">Category</div>
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <div class="text-truncate" data-i18n="Master Data">Master Data</div>
                     </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="{{url('/categories')}}" class="menu-link">
+                                <div class="text-truncate" data-i18n="Category">Category</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{url('/customers')}}" class="menu-link">
+                                <div class="text-truncate" data-i18n="Customer">Customer</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{url('/products')}}" class="menu-link">
+                                <div class="text-truncate" data-i18n="Product">Product</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+                <!-- Transaction -->
                 <li class="menu-item">
-                    <a href="{{url('/customers')}}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Customer">Customer</div>
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <div class="text-truncate" data-i18n="Transaction">Transaction</div>
                     </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="{{url('/categories')}}" class="menu-link">
+                                <div class="text-truncate" data-i18n="Orders">Orders</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+            </ul>
+        </li>
+
+        <!-- Pajak App -->
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div class="text-truncate" data-i18n="Pajak App">Pajak App</div>
+            </a>
+
+            <ul class="menu-sub">
+                <!-- Master Data -->
                 <li class="menu-item">
-                    <a href="{{url('/products')}}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Product">Product</div>
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <div class="text-truncate" data-i18n="Master Data">Master Data</div>
                     </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="{{url('/kendaraan')}}" class="menu-link">
+                                <div class="text-truncate" data-i18n="Kendaraan">Kendaraan</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{url('/pegawai')}}" class="menu-link">
+                                <div class="text-truncate" data-i18n="Pegawai">Pegawai</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Transaction -->
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <div class="text-truncate" data-i18n="Transaction">Transaction</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="{{url('/pembayaran')}}" class="menu-link">
+                                <div class="text-truncate" data-i18n="Pembayaran">Pembayaran</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </li>

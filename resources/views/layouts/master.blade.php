@@ -52,6 +52,7 @@
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/animate-css/animate.css')}}">
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+        <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/select2/select2.css')}}" />
         <!-- Row Group CSS -->
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css')}}">
         <!-- Form Validation -->
@@ -124,6 +125,8 @@
         <script src="{{asset('template/sneat/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js')}}"></script>
         <script src="{{asset('template/sneat/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js')}}"></script>
         <script src="{{asset('template/sneat/assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
+        <script src="{{asset('template/sneat/assets/vendor/libs/select2/select2.js')}}"></script>
+        <script src="{{asset('template/sneat/assets/vendor/libs/bootstrap-select/bootstrap-select.js')}}"></script>
         <!-- Flat Picker -->
         <script src="{{asset('template/sneat/assets/vendor/libs/moment/moment.js')}}"></script>
         <script src="{{asset('template/sneat/assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
@@ -143,6 +146,7 @@
         <script src="{{asset('template/sneat/assets/js/extended-ui-sweetalert2.js')}}"></script>
         {{-- <script src="{{asset('template/sneat/assets/js/tables-datatables-basic.js')}}"></script>
         <script src="{{asset('template/sneat/assets/js/tables-datatables-advanced.js')}}"></script> --}}
+        <script src="{{asset('template/sneat/assets/js/forms-selects.js')}}"></script>
 
         <!-- Place this tag in your head or just before your close body tag. -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>

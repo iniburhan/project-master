@@ -9,7 +9,7 @@ class MsProducts extends Model
 {
     use HasFactory;
     protected $connection = 'mysql';
-    protected $table = 'ms_products';
+    protected $table = 'ms_product';
     protected $primarykey = 'id';
 
     protected $guarded = [

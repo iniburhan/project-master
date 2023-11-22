@@ -34,16 +34,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/categories/update', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'update']);
     // Route::post('/categories/delete', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'destroy']); // with modal not sweetalert
     Route::post('/categories/delete/{id}', [App\Http\Controllers\POS\Admin\MsCategoriesController::class, 'destroy']);
-
     // route Customer
     Route::get('/customers', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'index']);
     Route::post('/customers/store', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'store']);
-    // Route::get('/categories/show/{id}', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'show']);
     Route::post('/customers/update', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'update']);
-    // Route::post('/customers/delete', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'destroy']); // with modal not sweetalert
     Route::post('/customers/delete', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'destroy']);
     Route::get('/customers/get-all-customer', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'getAllCustomer']);
     Route::get('/customers/get-customer-show', [App\Http\Controllers\POS\Admin\MsCustomersController::class, 'getCustomerShow']);
+    // route Product
+    Route::get('/products', [App\Http\Controllers\POS\Admin\MsProductsController::class, 'index']);
+    Route::post('/products/store', [App\Http\Controllers\POS\Admin\MsProductsController::class, 'store']);
+    Route::post('/products/update', [App\Http\Controllers\POS\Admin\MsProductsController::class, 'update']);
+    Route::post('/products/delete', [App\Http\Controllers\POS\Admin\MsProductsController::class, 'destroy']);
+    Route::get('/products/get-all-product', [App\Http\Controllers\POS\Admin\MsProductsController::class, 'getAllProduct']);
+    Route::get('/products/get-product-show', [App\Http\Controllers\POS\Admin\MsProductsController::class, 'getProductShow']);
 
 
     // PajakApp

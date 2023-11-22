@@ -27,7 +27,7 @@
     </div>
 </div> --}}
 
-<div class="container-xxl flex-grow-1 container-p-y">
+<div class="container-fluid flex-grow-1 container-p-y">
     @if(session('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <h6 class="alert-heading d-flex align-items-center mb-1">Well done :)</h6>

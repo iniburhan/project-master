@@ -35,19 +35,23 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card-datatable table-responsive">
-                <table id="example" class="table border-top" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Resi Pajak</th>
-                            <th>Bulan Lewat Pajak</th>
-                            <th>Total Denda</th>
-                            <th>Total Pajak Dibayar</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                </table>
+            <div class="card-body">
+                <div class="card-datatable table-responsive">
+                    <table id="example" class="table border-top" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Resi Pajak</th>
+                                <th>Nomor Polisi</th>
+                                <th>Pembayar</th>
+                                <th>Bulan Lewat Pajak</th>
+                                <th>Total Denda</th>
+                                <th>Total Pajak Dibayar</th>
+                                <th>Pegawai</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -88,8 +92,11 @@
                                 <div class="col-sm-6">
                                     <input type="text" id="keterangan_kendaraan" name="keterangan_kendaraan" class="form-control" placeholder="Keterangan Kendaraan" required/>
                                 </div>
-                                <div class="col-sm-12 mt-2">
+                                <div class="col-sm-6 mt-2">
                                     <input type="text" id="pajak_pertahun" name="pajak_pertahun" class="form-control" placeholder="Pajak Pertahun" required/>
+                                </div>
+                                <div class="col-sm-6 mt-2">
+                                    <input type="text" id="denda_telat_perbulan" name="denda_telat_perbulan" class="form-control" placeholder="Denda Perbulan" required/>
                                 </div>
                                 <div class="col-sm-12 mt-2">
                                     <input type="text" id="pembayar" name="pembayar" class="form-control" placeholder="Pembayar" required/>
@@ -157,6 +164,36 @@
                                 <div class="valid-feedback"> Looks good! </div>
                                 <div class="invalid-feedback"> Please enter Resi Pajak. </div>
                             </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Kendaraan</label>
+                                {{-- <input type="text" id="id_kendaraan" name="id_kendaraan" class="form-control" placeholder="Kendaraan" required/> --}}
+                                <select id="id_kendaraan_edit" name="id_kendaraan_edit" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                                    <option value=""></option>
+                                    @foreach ($data['kendaraan'] as $item)
+                                        <option value="{{$item->id}}">{{$item->no_polisi}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter Kendaraan. </div>
+                            </div>
+                            <div class="row mt-2" id="kendaraan_detail">
+                                <div class="col-sm-6">
+                                    {{-- <label class="form-label">Kendaraan</label> --}}
+                                    <input type="text" id="jenis_kendaraan" name="jenis_kendaraan" class="form-control" placeholder="Jenis Kendaraan" required/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" id="keterangan_kendaraan" name="keterangan_kendaraan" class="form-control" placeholder="Keterangan Kendaraan" required/>
+                                </div>
+                                <div class="col-sm-6 mt-2">
+                                    <input type="text" id="pajak_pertahun" name="pajak_pertahun" class="form-control" placeholder="Pajak Pertahun" required/>
+                                </div>
+                                <div class="col-sm-6 mt-2">
+                                    <input type="text" id="denda_telat_perbulan" name="denda_telat_perbulan" class="form-control" placeholder="Denda Perbulan" required/>
+                                </div>
+                                <div class="col-sm-12 mt-2">
+                                    <input type="text" id="pembayar" name="pembayar" class="form-control" placeholder="Pembayar" required/>
+                                </div>
+                            </div>
                             <div class="col-sm-12 mt-2">
                                 <label class="form-label">Bulan Lewat Pajak</label>
                                 <input type="number" id="bulan_lewat_pajak_edit" name="bulan_lewat_pajak" class="form-control" placeholder="Bulan Lewat Pajak" required/>
@@ -174,6 +211,18 @@
                                 <input type="number" id="total_pajak_dibayar_edit" name="total_pajak_dibayar" class="form-control" placeholder="Total Pajak Dibayar" required/>
                                 <div class="valid-feedback"> Looks good! </div>
                                 <div class="invalid-feedback"> Please enter the Total Pajak Dibayar. </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Pegawai</label>
+                                {{-- <input type="text" id="id_pegawai" name="id_pegawai" class="form-control" placeholder="Pegawai" required/> --}}
+                                <select id="id_pegawai_edit" name="id_pegawai_edit" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                                    <option value=""></option>
+                                    @foreach ($data['pegawai'] as $item)
+                                        <option value="{{$item->id}}">{{$item->nrp}} | {{$item->nama_pegawai}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="valid-feedback"> Looks good! </div>
+                                <div class="invalid-feedback"> Please enter Pegawai. </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -202,17 +251,42 @@
                             <label class="form-label">Resi Pajak</label>
                             <input type="text" id="resi_pajak_show" name="resi_pajak" class="form-control" placeholder="Resi Pajak" required/>
                         </div>
+                        <div class="col-sm-12">
+                            <label class="form-label">Kendaraan</label>
+                            <input type="text" id="no_polisi_show" name="no_polisi_show" class="form-control" placeholder="Kendaraan" required/>
+                        </div>
+                        <div class="row mt-2" id="kendaraan_detail">
+                            <div class="col-sm-6">
+                                <input type="text" id="jenis_kendaraan_show" name="jenis_kendaraan_show" class="form-control" placeholder="Jenis Kendaraan" required/>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="keterangan_kendaraan_show" name="keterangan_kendaraan_show" class="form-control" placeholder="Keterangan Kendaraan" required/>
+                            </div>
+                            <div class="col-sm-6 mt-2">
+                                <input type="text" id="pajak_pertahun_show" name="pajak_pertahun_show" class="form-control" placeholder="Pajak Pertahun" required/>
+                            </div>
+                            <div class="col-sm-6 mt-2">
+                                <input type="text" id="denda_telat_perbulan_show" name="denda_telat_perbulan_show" class="form-control" placeholder="Denda Perbulan" required/>
+                            </div>
+                            <div class="col-sm-12 mt-2">
+                                <input type="text" id="pembayar_show" name="pembayar_show" class="form-control" placeholder="Pembayar" required/>
+                            </div>
+                        </div>
                         <div class="col-sm-12 mt-2">
                             <label class="form-label">Bulan Lewat Pajak</label>
-                            <input type="number" id="bulan_lewat_pajak_show" name="bulan_lewat_pajak" class="form-control" placeholder="Bulan Lewat Pajak" required/>
+                            <input type="number" id="bulan_lewat_pajak_show" name="bulan_lewat_pajak_show" class="form-control" placeholder="Bulan Lewat Pajak" required/>
                         </div>
                         <div class="col-sm-12">
                             <label class="form-label">Total Denda</label>
-                            <input type="number" id="total_denda_show" name="total_denda" class="form-control" placeholder="Total Denda" required/>
+                            <input type="number" id="total_denda_show" name="total_denda_show" class="form-control" placeholder="Total Denda" required/>
                         </div>
                         <div class="col-sm-12">
                             <label class="form-label">Total Pajak Dibayar</label>
-                            <input type="number" id="total_pajak_dibayar_show" name="total_pajak_dibayar" class="form-control" placeholder="Total Pajak Dibayar" required/>
+                            <input type="number" id="total_pajak_dibayar_show" name="total_pajak_dibayar_show" class="form-control" placeholder="Total Pajak Dibayar" required/>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="form-label">Pegawai</label>
+                            <input type="text" id="nama_pegawai_show" name="nama_pegawai_show" class="form-control" placeholder="Pegawai" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -239,9 +313,12 @@
                 },
                 columns: [
                     { data: 'resi_pajak' },
+                    { data: 'no_polisi' },
+                    { data: 'pembayar' },
                     { data: 'bulan_lewat_pajak' },
                     { data: 'total_denda' },
                     { data: 'total_pajak_dibayar' },
+                    { data: 'nama_pegawai' },
                     {
                         data: "id",
                         render: function(data) {
@@ -262,7 +339,7 @@
                     },
                 ],
                 columnDefs: [
-                    { className: 'text-center', targets: [4] },
+                    { className: 'text-center', targets: [7] },
                 ],
             });
 
@@ -280,13 +357,24 @@
 
             // jenis kendaraan onchange at Add Data
             $('#kendaraan_detail').hide();
+            $('#jenis_kendaraan').attr('readonly', true);
+            $('#keterangan_kendaraan').attr('readonly', true);
+            $('#pajak_pertahun').attr('readonly', true);
+            $('#denda_telat_perbulan').attr('readonly', true);
+            $('#pembayar').attr('readonly', true);
+            $('#total_denda').attr('readonly', true);
+            $('#total_pajak_dibayar').attr('readonly', true);
             $('#id_kendaraan').on('change', function(e){
                 e.preventDefault();
                 var id = this.value;
                 $('#jenis_kendaraan').empty();
                 $('#keterangan_kendaraan').empty();
                 $('#pajak_pertahun').empty();
+                $('#denda_telat_perbulan').empty();
                 $('#pembayar').empty();
+                $('#bulan_lewat_pajak').val('');
+                $('#total_denda').val('');
+                $('#total_pajak_dibayar').val('');
                 if (id == '') {
                     $('#kendaraan_detail').hide();
                 }else{
@@ -299,11 +387,26 @@
                             $('#jenis_kendaraan').val(data.jenis_kendaraan);
                             $('#keterangan_kendaraan').val(data.keterangan_kendaraan);
                             $('#pajak_pertahun').val(data.pajak_pertahun);
+                            $('#denda_telat_perbulan').val(data.denda_telat_perbulan);
                             $('#pembayar').val(data.pembayar);
                         }
                     });
                     $('#kendaraan_detail').show();
                 }
+            });
+
+            // bulan_lewat_pajak onchange calculation
+            $('#bulan_lewat_pajak').on('change', function(e){
+                e.preventDefault();
+                var bulan_lewat_pajak = this.value;
+                var pajak_pertahun = $('#pajak_pertahun').val();
+                var denda = $('#denda_telat_perbulan').val();
+
+                total_denda = (bulan_lewat_pajak * denda);
+                total_pajak_dibayar = parseInt(total_denda) + parseInt(pajak_pertahun);
+                $('#total_denda').val(total_denda);
+                $('#total_pajak_dibayar').val(total_pajak_dibayar);
+
             });
 
             // Add Data
@@ -371,6 +474,14 @@
                         $('#bulan_lewat_pajak_show').val(data.bulan_lewat_pajak);
                         $('#total_denda_show').val(data.total_denda);
                         $('#total_pajak_dibayar_show').val(data.total_pajak_dibayar);
+
+                        $('#no_polisi_show').val(data.no_polisi);
+                        $('#jenis_kendaraan_show').val(data.jenis_kendaraan);
+                        $('#keterangan_kendaraan_show').val(data.keterangan_kendaraan);
+                        $('#pajak_pertahun_show').val(data.pajak_pertahun);
+                        $('#denda_telat_perbulan_show').val(data.denda_telat_perbulan);
+                        $('#pembayar_show').val(data.pembayar);
+                        $('#nama_pegawai_show').val(data.nama_pegawai);
                     }
                 });
             });
@@ -417,15 +528,17 @@
                 let total_pajak_dibayar = $('#total_pajak_dibayar_edit').val();
                 let no_polisi = $('#no_polisi_edit').val();
                 let pembayar = $('#pembayar_edit').val();
+                let id_kendaraan = $('#id_kendaraan_edit').val();
+                let id_pegawai = $('#id_pegawai_edit').val();
 
-                if (!resi_pajak && !bulan_lewat_pajak && !total_denda && !total_pajak_dibayar) {
+                if (!resi_pajak && !bulan_lewat_pajak && !total_denda && !total_pajak_dibayar && !no_polisi && !pembayar && !id_kendaraan && !id_pegawai) {
                     $('#btn_edit_2').click(); // button submit for validation when input type is empty
                 }else{
                     $(this).prop('disabled', true); // button save disabled after click
                     $.ajax({
                         type: "POST",
                         url: "{{ url('/pembayaran/update') }}",
-                        data: {id: id, resi_pajak: resi_pajak, bulan_lewat_pajak: bulan_lewat_pajak, total_denda: total_denda, total_pajak_dibayar: total_pajak_dibayar},
+                        data: {id: id, resi_pajak: resi_pajak, bulan_lewat_pajak: bulan_lewat_pajak, total_denda: total_denda, total_pajak_dibayar: total_pajak_dibayar, no_polisi: no_polisi, pembayar: pembayar, id_kendaraan: id_kendaraan, id_pegawai: id_pegawai},
                         // dataType: dataType
                         success: function(response){
                             if(response){

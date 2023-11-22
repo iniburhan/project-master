@@ -545,6 +545,13 @@
             </a>
 
             <ul class="menu-sub">
+                <!-- Dashboard -->
+                <li class="menu-item">
+                    <a href="{{url('/dashboard-pajak')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+                    </a>
+                </li>
                 <!-- Master Data -->
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">

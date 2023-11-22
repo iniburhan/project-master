@@ -165,8 +165,9 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" id="login_btn" type="submit">Sign in</button>
-                                <button class="btn btn-primary d-grid w-100" id="login_loading" type="button" disabled>
+                                <button class="btn btn-primary w-100" id="login_btn" type="submit">Sign in</button>
+                                {{-- <button class="btn btn-primary w-100" id="login_loading"></button> --}}
+                                <button class="btn btn-primary w-100" id="login_loading" type="button" disabled>
                                     <div class="sk-wave sk-secondary">
                                         <div class="sk-wave-rect"></div>
                                         <div class="sk-wave-rect"></div>
@@ -195,13 +196,32 @@
 
     @section('my-script')
         <link rel="stylesheet" href="{{asset('template/sneat/assets/vendor/libs/spinkit/spinkit.css')}}" />
-        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> --}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
         <script>
+            // $('#login_loading').hide();
+            // $(document).ready(function() {
+            //     $('#login_btn').on('click',function() {
+            //         $('#login_loading').show();
+
+            //     });
+            // });
+
             $('#login_loading').hide();
             $(document).ready(function() {
                 $('#login_btn').click(function() {
-                    $('#login_loading').show();
+
+                    var email = $('input[name="email"').val();
+                    var password = $('input[name="password"').val();
+
+                    if (email == "" && password == "") {
+                        alert('masukkan email dan password!');
+                    } else {
+
+                            $('#login_btn').hide();
+
+                            $('#login_loading').show();
+                    }
                 });
             });
         </script>

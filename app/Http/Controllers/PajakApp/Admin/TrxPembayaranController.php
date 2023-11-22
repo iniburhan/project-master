@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 use App\Models\Table\PajakApp\MsKendaraan;
 use App\Models\Table\PajakApp\MsPegawai;
 use App\Models\Table\PajakApp\TrxPembayaran;
+use App\Models\View\PajakApp\VwPembayaran;
 use Illuminate\Support\Facades\Auth;
 
 class TrxPembayaranController extends Controller
 {
     public function index()
     {
-        $pembayaran = TrxPembayaran::where('flag', 1)->get();
+        // $pembayaran = TrxPembayaran::where('flag', 1)->get();
+        $pembayaran = VwPembayaran::get();
 
         $data = [
             'pembayaran' => $pembayaran,
@@ -121,14 +123,17 @@ class TrxPembayaranController extends Controller
 
     public function getAllPembayaran()
     {
-        $pembayaran = TrxPembayaran::where('flag', 1)->get();
+        // $pembayaran = TrxPembayaran::where('flag', 1)->get();
+        $pembayaran = VwPembayaran::get();
         return $pembayaran;
     }
 
     public function getPembayaranShow(Request $request)
     {
         $id = $request->id;
-        $pembayaran = TrxPembayaran::where('flag', 1)->where('id', $id)->first();
+        // $pembayaran = TrxPembayaran::where('flag', 1)->where('id', $id)->first();
+        $pembayaran = VwPembayaran::where('id', $id)->first();
+        // dd($pembayaran);
         return $pembayaran;
     }
 }

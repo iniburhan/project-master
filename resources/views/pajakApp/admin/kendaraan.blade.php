@@ -35,21 +35,22 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card-datatable table-responsive">
-                <table id="example" class="table border-top" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Jenis Kendaraan</th>
-                            <th>Keterangan Kendaraan</th>
-                            <th>Pajak Pertahun</th>
-                            <th>Denda Perbulan</th>
-                            <th>Nomor Polisi</th>
-                            <th>Pembayar</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                </table>
+            <div class="card-body">
+                <div class="card-datatable table-responsive">
+                    <table id="example" class="table border-top" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Jenis Kendaraan</th>
+                                <th>Keterangan Kendaraan</th>
+                                <th>Pajak Pertahun</th>
+                                <th>Denda Perbulan</th>
+                                <th>Nomor Polisi</th>
+                                <th>Pembayar</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
 

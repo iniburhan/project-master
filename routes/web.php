@@ -47,6 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     // PajakApp
+    // dashboard pajakApp
+    Route::get('/dashboard-pajak', [App\Http\Controllers\PajakApp\DashboardController::class, 'index']);
+    Route::get('/dashboard-pajak/get-data-pembayar', [App\Http\Controllers\PajakApp\DashboardController::class, 'getJumlahDendaSetiapPembayar']);
     // route Kendaraan
     Route::get('/kendaraan', [App\Http\Controllers\PajakApp\Admin\MsKendaraanController::class, 'index']);
     Route::post('/kendaraan/store', [App\Http\Controllers\PajakApp\Admin\MsKendaraanController::class, 'store']);

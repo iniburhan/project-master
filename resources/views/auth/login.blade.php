@@ -199,14 +199,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
         <script>
-            // $('#login_loading').hide();
-            // $(document).ready(function() {
-            //     $('#login_btn').on('click',function() {
-            //         $('#login_loading').show();
-
-            //     });
-            // });
-
             $('#login_loading').hide();
             $(document).ready(function() {
                 $('#login_btn').click(function() {
@@ -217,10 +209,8 @@
                     if (email == "" && password == "") {
                         alert('masukkan email dan password!');
                     } else {
-
-                            $('#login_btn').hide();
-
-                            $('#login_loading').show();
+                        $('#login_btn').hide();
+                        $('#login_loading').show();
                     }
                 });
             });
